@@ -19,26 +19,46 @@ public class Restaurant {
         ListePlat.remove(p);
     }
 
+    public void modifierPlat(Plat p){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Entrez id du plat que vous pouvez supprimer :");
+        int id = input.nextInt();
+        for(Plat p: ListePlat){
+            if(p.getId_plat() == id){
+                System.out.println("Entrez le nouveau nom :");
+                String nom = input.nextLine();
+                p.setNom(nom);
+                System.out.println("Entrez le nouveau prix :");
+                double prix = input.nextDouble();
+                p.setPrix(prix);
+            }else{
+                System.out.println("aucune plate trouvé par cette id!!");
+            }
+        }
+
+
+
+    }
+
     public void AjouterCommande(Commande c){
         ListeCommandes.add(c);
     }
 
     public void AfficherCommandes(){
         System.out.println("=== Historique des commandes ===");
-        for(Commande p: Listecommandes){
-            System.out.println("Commande "+p.getNom()+", du client "
-                    +p.getClientid()+", servie par serveur "+p.getServeurid());
+        for(Commande c: Listecommandes){
+            c.afficherDetails();
         }
     }
 
     public void AfficherPlat(Plat p){
-        p.afficherDetails();
+        p.afficherInfo();
     }
 
     public void afficherMenu(){
         System.out.println("=== Menu du plates ===");
         for(Plat p: ListePlat){
-            p.afficherDetails();
+            p.afficherInfo();
         }
     }
     public void MenuAdmin(){
@@ -48,9 +68,10 @@ public class Restaurant {
             System.out.println("=== Menu Admin ===");
             System.out.println("1. Ajouter plat");
             System.out.println("2. Supprimer plat");
-            System.out.println("3. Afficher plat");
-            System.out.println("4. Afficher menu");
-            System.out.println("5. Afficher commande");
+            System.out.println("3. Modifier un plat");
+            System.out.println("4. Afficher plat");
+            System.out.println("5. Afficher menu");
+            System.out.println("6. Afficher historique du commandes");
             System.out.println("0. Quitter");
             choix = input.nextInt();
 
@@ -64,29 +85,40 @@ public class Restaurant {
                     System.out.println("Plat a été créé");
                     break;
                 case 2:
-                    System.out.println("Entrez id du plat que vous pouvez supprimer");
+                    System.out.println("Entrez id du plat que vous pouvez supprimer :");
                     int id = input.nextInt();
                     for(Plat p: ListePlat){
-                        if(p.getId() == id){
-                           SupprimerPlat(e);
+                        if(p.getId_plat() == id){
+                           SupprimerPlat(p);
                         }else{
                             System.out.println("aucune plate trouvé par cette id!!");
                         }
                     }
                     break;
                 case 3:
+                    System.out.println("Entrez id du plat que vous pouvez modifié :");
+                    id = input.nextInt();
+                    for(Plat p: ListePlat){
+                        if(p.getId_plat() == id){
+                            SupprimerPlat(p);
+                        }else{
+                            System.out.println("aucune plate trouvé par cette id!!");
+                        }
+                    }
+                    break;
+                case 4:
                     System.out.println("Entrez id du plat");
                     id = input.nextInt();
                     for(Plat p: ListePlat){
-                        if(id == p.getId()){
+                        if(id == p.getId_plat()){
                             AfficherPlat(p);
                         }System.out.println("aucune plate trouvé par cette id!!");
                     }
                     break;
-                case 4:
+                case 5:
                     afficherMenu();
                     break;
-                case 5:
+                case 6:
                     System.out.println("Entrez l'id du commande");
                     id = input.nextInt();
                     for(Commande c: ListeCommandes){
@@ -100,6 +132,4 @@ public class Restaurant {
         }while(choix != 0);
 
     }
-
-
 }
