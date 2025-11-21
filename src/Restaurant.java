@@ -32,8 +32,10 @@ public class Restaurant {
         ListePlat.add(p);
     }
 
-    public void SupprimerPlat(int id){
-
+    public void SupprimerPlat(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Entrez id du plat que vous pouvez supprimer :");
+        int id = input.nextInt();
         recherchePlat(id);
         if (recherchePlat(id) != null) {
             ListePlat.remove(recherchePlat(id));
@@ -55,18 +57,18 @@ public class Restaurant {
         return plattrouve;
     }
 
-    public void modifierPlat(int id){
+    public void modifierPlat(){
         Scanner input = new Scanner(System.in);
         System.out.println("Entrez id du plat que vous pouvez modifier :");
         int id = input.nextInt();
-        for(Plat plat: ListePlat){
+        for(Plat p: ListePlat){
             if(p.getId_plat() == id){
                 System.out.println("Entrez le nouveau nom :");
                 String nom = input.nextLine();
-                plat.setNom(nom);
+                p.setNom(nom);
                 System.out.println("Entrez le nouveau prix :");
                 double prix = input.nextDouble();
-                plat.setPrix(prix);
+                p.setPrix(prix);
             }else{
                 System.out.println("aucune plate trouvé par cette id!!");
             }
@@ -84,8 +86,11 @@ public class Restaurant {
         }
     }
 
-    public void AfficherPlat(Plat p){
-        p.afficherInfo();
+    public void AfficherPlat(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Entrez id du plat");
+        int id = input.nextInt();
+        recherchePlat(id).afficherInfo();
     }
 
     public void afficherMenu(){
@@ -113,25 +118,22 @@ public class Restaurant {
                     AjouterPlat();
                     break;
                 case 2:
-                    System.out.println("Entrez id du plat que vous pouvez supprimer :");
-                    int id = input.nextInt();
-                    SupprimerPlat(id);
+                    SupprimerPlat();
                     break;
                 case 3:
-                    System.out.println("Entrez id du plat que vous pouvez modifié :");
-                    id = input.nextInt();
-                    modifierPlat(id);
+                    modifierPlat();
                     break;
                 case 4:
-                    System.out.println("Entrez id du plat");
-                    id = input.nextInt();
-                    recherchePlat(id);
+                    AfficherPlat();
                     break;
                 case 5:
                     afficherMenu();
                     break;
                 case 6:
                     AfficherCommandes();
+                    break;
+                default :
+                    System.out.println("Choix invalide ! Veuillez entrer un nombre entre 0 et 6.");
                     break;
             }
 
