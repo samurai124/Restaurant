@@ -1,20 +1,21 @@
 package Serveur;
 
 public class Serveur {
-    private int id_serveur;
+    private static int nextId = 1;
+    private int id;
     private String nom;
 
-    public Serveur(int id_serveur, String nom) {
-        this.id_serveur = id_serveur;
+    public Serveur(String nom) {
+        this.id = nextId++;
         this.nom = nom;
     }
 
-    public int getId_serveur() {
-        return id_serveur;
+    public int getId() {
+        return id;
     }
 
-    public void setId_serveur(int id_serveur) {
-        this.id_serveur = id_serveur;
+    public void setId(int id_serveur) {
+        this.id = id_serveur;
     }
 
     public String getNom() {
@@ -24,22 +25,19 @@ public class Serveur {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public void service(){
+
+    public void service() {
         System.out.println("choisir votre plat ");
-
-
-
     }
-    public void serviceVip(){
-        System.out.println("bienvenus sur le survice VIP :");
 
-
+    public void serviceVip() {
+        System.out.println("bienvenus sur le service VIP :");
     }
 
     @Override
     public String toString() {
-        return "Serveur.Serveur{" +
-                "id_serveur=" + id_serveur +
+        return "Serveur{" +
+                "id_serveur=" + id +
                 ", nom='" + nom + '\'' +
                 '}';
     }

@@ -1,68 +1,103 @@
+import Client.Client;
+import Plat.Plat;
+import Plat.PlatSpecial;
+import Plat.PlatDuJour;
+import Restaurant.Restaurant;
+import Serveur.Serveur;
+import commande.Commande;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Restaurant restaurant = new Restaurant();
-        Commande commande = new Commande();
 
-        List<Plat> commandPlats = new ArrayList<>();
-        Client client = new Client();
-        Serveur serveur = new Serveur();
-        boolean service = true;
+        Scanner input = new Scanner(System.in);
+
+        // Create Restaurant.Restaurant
+        Restaurant restaurant = new Restaurant("MonRestaurant");
+
+        // Add some servers
+        List<Serveur> serveurs = new ArrayList<>();
+        serveurs.add(new Serveur("Ahmed"));
+        serveurs.add(new Serveur("Sara"));
+        serveurs.add(new Serveur("Rachid"));
+
+        // Add some plats
+        restaurant.getListePlat().add(new Plat("Salade", 30));
+        restaurant.getListePlat().add(new PlatSpecial("Pizza", 50, 10));
+        restaurant.getListePlat().add(new PlatDuJour("Steak", 100, 0.2));
+
         int choix;
-
         do {
-            System.out.println("1. pizza prix : 100 DH");
-            System.out.println("2. tacos prix 50 DH");
-            System.out.println("3. burger prix 80 DH");
-            System.out.println("4. drinks prix 20 DH");
-            System.out.println("5. salade prix 40 DH");
-            System.out.println("6. jus prix 50 DH");
-            System.out.println("7. Service VIP prix : 100 DH");
+            System.out.println("\n=== Bienvenue au Restaurant.Restaurant ===");
+            System.out.println("1. Menu Admin");
+            System.out.println("2. Passer une commande (Client)");
             System.out.println("0. Quitter");
-            choix = scanner.nextInt();
-            switch (choix){
+            System.out.print("Votre choix : ");
+            choix = input.nextInt();
+            input.nextLine();
+
+            switch (choix) {
                 case 1:
-                    Plat plat1 = new Plat(1,"pizza",100);
-                    commandPlats.add(plat1);
+                    restaurant.MenuAdmin();
                     break;
                 case 2:
-                    Plat plat2 = new Plat(2,"tacos",50);
-                    commandPlats.add(plat2);
-                    break;
-                case 3:
-                    Plat plat3 = new Plat(3,"burger",80);
-                    commandPlats.add(plat3);
-                    break;
-                case 4:
-                    Plat plat4 = new Plat(4,"drinks",20);
-                    commandPlats.add(plat4);
-                    break;
-                case 5:
-                    Plat plat5 = new Plat(5,"salade",40);
-                    commandPlats.add(plat5);
-                    break;
-                case 6:
-                    Plat plat6 = new Plat(6,"jus",50);
-                    commandPlats.add(plat6);
-                    break;
-                case 7:
+                    // Client info
+                    System.out.print("Entrez votre nom : ");
+                    String nomClient = input.nextLine();
+                    Client client = new Client(nomClient);
+                    boolean vip;
+                    System.out.print("Voulez-vous VIP ? (oui/non) : ");
+                    String choix_vip = input.nextLine();
+                    if (choix_vip.equalsIgnoreCase("oui")) {
+                        vip = true;
+                    } else {
+                        vip = false;
+                    }
+                    client.setVip(vip);
 
-                    service = serveur.serviceVIP();
 
+                    // Show menu
+                    restaurant.afficherMenu();
+
+                    // Client selects plats
+                    ArrayList<Plat> commandePlats = new ArrayList<>();
+                    String continuer;
+                    do {
+                        System.out.print("Entrez l'ID du plat à ajouter : ");
+                        int idPlat = input.nextInt();
+                        input.nextLine();
+                        Plat p = restaurant.recherchePlat(idPlat);
+                        if (p != null) {
+                            commandePlats.add(p);
+                        }
+                        System.out.print("Ajouter un autre plat ? (oui/non) : ");
+                        continuer = input.nextLine();
+                    } while (continuer.equalsIgnoreCase("oui"));
+
+                    // Assign random server
+                    Random r = new Random();
+                    Serveur serveur = serveurs.get(r.nextInt(serveurs.size()));
+
+                    // Create command
+                    Commande commande = new Commande(serveur, client, commandePlats);
+                    restaurant.AjouterCommande(commande);
+
+                    System.out.println("\n=== Détails de votre commande ===");
+                    commande.afficherDetails();
                     break;
+
                 case 0:
+                    System.out.println("Merci d'avoir utilisé notre application !");
                     break;
+
+                default:
+                    System.out.println("Choix invalide !");
             }
-        }while (choix != 0);
 
-        commande.calculeTotalCommande(commandPlats,service);
-        commande.afficherDetails(commandPlats,service,client,serveur);
-        restaurant.AjouterCommande(commande);
-
-
+        } while (choix != 0);
     }
 }

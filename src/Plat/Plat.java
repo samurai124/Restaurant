@@ -1,20 +1,25 @@
 package Plat;
 
 public class Plat {
-    private int id_plat;
+    private static int nextId = 1;
+    private int id;
     private String nom;
     private double prix;
-    public Plat(int id_plat , String nom , double prix){
-        this.id_plat = id_plat;
+
+    public Plat(String nom, double prix) {
+        this.id = nextId++;
         this.nom = nom;
         this.prix = prix;
     }
+
     public int getId_plat() {
-        return id_plat;
+        return id;
     }
-    public void setId_plat(int id_plat) {
-        this.id_plat = id_plat;
+
+    public void setId(int id_plat) {
+        this.id = id_plat;
     }
+
     public String getNom() {
         return nom;
     }
@@ -30,7 +35,8 @@ public class Plat {
     public void setPrix(double prix) {
         this.prix = prix;
     }
-    public void afficherInfo(){
-        System.out.printf("Plat nom : %s , prix : %.2f\n",nom,prix);
+
+    public void afficherInfo() {
+        System.out.printf("Plat id : %d nom : %s , prix : %.2f\n",id, nom, prix);
     }
 }
