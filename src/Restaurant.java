@@ -10,18 +10,56 @@ public class Restaurant {
         this.nom = nom;
     }
 
-    public void AjouterPlat(String nom, double prix){
-        Plat p = new Plat();
+    public String getNom() {
+        return nom;
+    }
+
+    public List<Plat> getListePlat() {
+        return ListePlat;
+    }
+
+    public List<Commande> getListeCommandes() {
+        return ListeCommandes;
+    }
+
+    public void AjouterPlat(){
+        System.out.print("Entrez le nom du plat :");
+        String nom = input.nextLine();
+        System.out.print("Entrez le prix :");
+        double prix = input.nextDouble();
+        System.out.println("Plat a été créé");
+        Plat p = new Plat(nom,prix);
         ListePlat.add(p);
     }
 
-    public void SupprimerPlat(Plat p){
-        ListePlat.remove(p);
-    }
-
-    public void modifierPlat(Plat p){
+    public void SupprimerPlat(){
         Scanner input = new Scanner(System.in);
         System.out.println("Entrez id du plat que vous pouvez supprimer :");
+        int id = input.nextInt();
+        recherchePlat(id);
+        if (recherchePlat(id) != null) {
+            ListePlat.remove(recherchePlat(id));
+            System.out.println("Plat supprimer avec succes");
+        } else {
+            System.out.println("Suppression impossible : plat introuvable !");
+        }
+    }
+
+    public Plat recherchePlat(int id){
+        Plat plattrouve = null;
+        for(Plat p: ListePlat){
+            if(p.getId_plat() == id){
+                plattrouve = p;
+            }
+        }if(plattrouve == null){
+            System.out.println("aucune plate trouvé par cette id!!");
+        }
+        return plattrouve;
+    }
+
+    public void modifierPlat(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Entrez id du plat que vous pouvez modifier :");
         int id = input.nextInt();
         for(Plat p: ListePlat){
             if(p.getId_plat() == id){
@@ -35,9 +73,6 @@ public class Restaurant {
                 System.out.println("aucune plate trouvé par cette id!!");
             }
         }
-
-
-
     }
 
     public void AjouterCommande(Commande c){
@@ -51,8 +86,11 @@ public class Restaurant {
         }
     }
 
-    public void AfficherPlat(Plat p){
-        p.afficherInfo();
+    public void AfficherPlat(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Entrez id du plat");
+        int id = input.nextInt();
+        recherchePlat(id).afficherInfo();
     }
 
     public void afficherMenu(){
@@ -77,55 +115,25 @@ public class Restaurant {
 
             switch(choix){
                 case 1:
-                    System.out.print("Entrez le nom du plat :");
-                    String nom = input.nextLine();
-                    System.out.print("Entrez le prix :");
-                    double prix = input.nextDouble();
-                    AjouterPlat(nom,prix);
-                    System.out.println("Plat a été créé");
+                    AjouterPlat();
                     break;
                 case 2:
-                    System.out.println("Entrez id du plat que vous pouvez supprimer :");
-                    int id = input.nextInt();
-                    for(Plat p: ListePlat){
-                        if(p.getId_plat() == id){
-                           SupprimerPlat(p);
-                        }else{
-                            System.out.println("aucune plate trouvé par cette id!!");
-                        }
-                    }
+                    SupprimerPlat();
                     break;
                 case 3:
-                    System.out.println("Entrez id du plat que vous pouvez modifié :");
-                    id = input.nextInt();
-                    for(Plat p: ListePlat){
-                        if(p.getId_plat() == id){
-                            SupprimerPlat(p);
-                        }else{
-                            System.out.println("aucune plate trouvé par cette id!!");
-                        }
-                    }
+                    modifierPlat();
                     break;
                 case 4:
-                    System.out.println("Entrez id du plat");
-                    id = input.nextInt();
-                    for(Plat p: ListePlat){
-                        if(id == p.getId_plat()){
-                            AfficherPlat(p);
-                        }System.out.println("aucune plate trouvé par cette id!!");
-                    }
+                    AfficherPlat();
                     break;
                 case 5:
                     afficherMenu();
                     break;
                 case 6:
-                    System.out.println("Entrez l'id du commande");
-                    id = input.nextInt();
-                    for(Commande c: ListeCommandes){
-                        if(id == c.getId()){
-                            c.afficherDetails();
-                        }
-                    }
+                    AfficherCommandes();
+                    break;
+                default :
+                    System.out.println("Choix invalide ! Veuillez entrer un nombre entre 0 et 6.");
                     break;
             }
 
