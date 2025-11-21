@@ -10,6 +10,18 @@ public class Restaurant {
         this.nom = nom;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public List<Plat> getListePlat() {
+        return ListePlat;
+    }
+
+    public List<Commande> getListeCommandes() {
+        return ListeCommandes;
+    }
+
     public void AjouterPlat(String nom, double prix){
         Plat p = new Plat();
         ListePlat.add(p);
