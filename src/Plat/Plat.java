@@ -1,19 +1,19 @@
 package Plat;
 
 public class Plat {
-    private int id_plat;
+    private int id;
     private String nom;
     private double prix;
     public Plat(int id_plat , String nom , double prix){
-        this.id_plat = id_plat;
+        this.id = id_plat;
         this.nom = nom;
         this.prix = prix;
     }
     public int getId_plat() {
-        return id_plat;
+        return id;
     }
     public void setId_plat(int id_plat) {
-        this.id_plat = id_plat;
+        this.id = id_plat;
     }
     public String getNom() {
         return nom;

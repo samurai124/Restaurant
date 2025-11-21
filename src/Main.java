@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Client.Client;
+import Commande.Commande;
+import Plat.Plat;
+import Serveur.Serveur;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -50,9 +55,7 @@ public class Main {
                     commandPlats.add(plat6);
                     break;
                 case 7:
-
                     service = serveur.serviceVIP();
-
                     break;
                 case 0:
                     break;

@@ -1,20 +1,21 @@
 package Serveur;
 
 public class Serveur {
-    private int id_serveur;
+    private static int nextId = 0;
+    private int id;
     private String nom;
 
-    public Serveur(int id_serveur, String nom) {
-        this.id_serveur = id_serveur;
+    public Serveur(String nom) {
+        this.id = nextId++;
         this.nom = nom;
     }
 
-    public int getId_serveur() {
-        return id_serveur;
+    public int getId() {
+        return id;
     }
 
-    public void setId_serveur(int id_serveur) {
-        this.id_serveur = id_serveur;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -39,7 +40,7 @@ public class Serveur {
     @Override
     public String toString() {
         return "Serveur.Serveur{" +
-                "id_serveur=" + id_serveur +
+                "id_serveur=" + id +
                 ", nom='" + nom + '\'' +
                 '}';
     }
