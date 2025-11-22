@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import Client.Client;
+import commande.Commande;
+import Plat.Plat;
+import Serveur.Serveur;
 
 public class Restaurant {
     private String nom;
-    private List<Plat>ListePlat = new ArrayList<>();
+    private List<Plat> ListePlat = new ArrayList<>();
     private List<Commande>ListeCommandes = new ArrayList<>();
+    Scanner input = new Scanner(System.in);
 
     public Restaurant(String nom){
         this.nom = nom;
@@ -81,7 +87,7 @@ public class Restaurant {
 
     public void AfficherCommandes(){
         System.out.println("=== Historique des commandes ===");
-        for(Commande c: Listecommandes){
+        for(Commande c: ListeCommandes){
             c.afficherDetails();
         }
     }
