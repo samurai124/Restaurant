@@ -2,13 +2,13 @@ import Client.Client;
 import Plat.Plat;
 import Plat.PlatSpecial;
 import Plat.PlatDuJour;
-import Restaurant.Restaurant;
 import Serveur.Serveur;
 import commande.Commande;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import Restaurant.Restaurant;
 
 public class Main {
 
