@@ -63,7 +63,7 @@ public class Main {
                     // Show menu
                     restaurant.afficherMenu();
 
-                    // Client selects plats
+                    // plats
                     ArrayList<Plat> commandePlats = new ArrayList<>();
                     String continuer;
                     do {
@@ -78,11 +78,11 @@ public class Main {
                         continuer = input.nextLine();
                     } while (continuer.equalsIgnoreCase("oui"));
 
-                    // Assign random server
+                    // server
                     Random r = new Random();
                     Serveur serveur = serveurs.get(r.nextInt(serveurs.size()));
 
-                    // Create command
+                    // command
                     Commande commande = new Commande(serveur, client, commandePlats);
                     restaurant.AjouterCommande(commande);
 
