@@ -3,8 +3,8 @@ package Plat;
 public class PlatSpecial extends Plat {
     private double supplement;
 
-    public PlatSpecial(int id_plat, String nom, double prix, double supplement) {
-        super(id_plat, nom, prix);
+    public PlatSpecial(String nom, double prix, double supplement) {
+        super(nom, prix);
         this.supplement = supplement;
     }
 
@@ -22,7 +22,7 @@ public class PlatSpecial extends Plat {
 
     @Override
     public void afficherInfo() {
-        System.out.printf("Plat Special : %s , prix de base : %.2f , supplément : %.2f , prix final : %.2f\n",
-                getNom(), getPrix(), supplement, getPrixFinal());
+        System.out.printf("Plat Special id %d , nom : %s , prix de base : %.2f , supplément : %.2f , prix final : %.2f\n",
+                getId_plat(),getNom(), getPrix(), supplement, getPrixFinal());
     }
 }

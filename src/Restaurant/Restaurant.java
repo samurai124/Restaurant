@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import Client.Client;
-import commande.Commande;
+package Restaurant;
 import Plat.Plat;
-import Serveur.Serveur;
+import commande.Commande;
+
+import java.util.ArrayList;
+import java.util.*;
 
 public class Restaurant {
+    static Scanner input = new Scanner(System.in);
     private String nom;
-    private List<Plat> ListePlat = new ArrayList<>();
-    private List<Commande>ListeCommandes = new ArrayList<>();
-    Scanner input = new Scanner(System.in);
+    private List<Plat>ListePlat = new ArrayList<>();
+    private List<Commande> ListeCommandes = new ArrayList<>();
 
     public Restaurant(String nom){
         this.nom = nom;

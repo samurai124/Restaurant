@@ -1,17 +1,23 @@
 package Client;
 
 public class Client {
-    private int id_Client;
+    private static int nextId = 1;
+    private int id;
     private String nom;
-
     private boolean Vip;
 
-    public int getId_Client() {
-        return id_Client;
+    public Client(String nom) {
+        this.id = nextId++;
+        this.nom = nom;
+        this.Vip = false;
     }
 
-    public void setId_Client(int id_Client) {
-        this.id_Client = id_Client;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id_Client) {
+        this.id = id_Client;
     }
 
     public String getNom() {
@@ -19,11 +25,8 @@ public class Client {
     }
 
     public void setNom(String nom) {
-
         this.nom = nom;
     }
-
-
 
     public boolean isVip() {
         return Vip;
@@ -33,34 +36,20 @@ public class Client {
         Vip = vip;
     }
 
-    public void  PasserCommend() {
-        System.out.println("choisir votre type de serveur s'il vous plus : si vous voules VIP apier sur true ");
-
-        if (Vip = false) {
+    public void PasserCommend() {
+        System.out.println("choisir votre type de serveur s'il vous plait : si vous voulez VIP tapez true ");
+        if (!Vip) {
             System.out.println("choisir votre plat s'il vous plait");
-
-
-
-        }else {
-            System.out.println("bienvenus sur notre service vip  vellez-vous choisir votre plat s'il vous plait ");
+        } else {
+            System.out.println("bienvenus sur notre service vip, veillez choisir votre plat s'il vous plait");
         }
     }
 
-
-
-
-
-
-
-
-
-
     @Override
     public String toString() {
-        return "Client.Client{" +
-                "id_Client=" + id_Client +
+        return "Client{" +
+                "id_Client=" + id +
                 ", nom='" + nom + '\'' +
-                ", historicCommande='" +  '\'' +
                 ", Vip=" + Vip +
                 '}';
     }
